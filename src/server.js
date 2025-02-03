@@ -12,6 +12,17 @@ app.get("/", (request, response) => {
 	});
 });
 
+
+
+
+
+const {PokeApiRouter} = require("./controllers/PokeApiController.js");
+app.use("/pokeapi", PokeApiRouter);
+
+
+
+
+
 // Wildcard * means "match any route"
 // Put this at the end of your route declarations
 // to catch anything that does not match an earlier route
@@ -30,7 +41,7 @@ app.use((error, request, response, next) => {
 	console.log("Error occured in the server.");
 	console.log(JSON.stringify(error));
 	response.json({
-		errors: request.body.errors,
+		// errors: request.body?.errors,
 		message: error.message
 	});
 });
