@@ -23,7 +23,8 @@ const TeamSchema = new mongoose.Schema({
 	},
 	trainer: {
 		type: mongoose.Types.ObjectId, 
-		ref: 'User'
+		ref: 'User',
+		required: false
 	}
 });
 
