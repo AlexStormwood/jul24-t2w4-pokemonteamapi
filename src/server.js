@@ -6,6 +6,37 @@ const express = require("express");
 // Create an instance of the Expres system 
 const app = express();
 
+const mongoose = require("mongoose");
+
+let databaseUrl = "";
+switch (process.env.NODE_ENV?.toLocaleLowerCase()) {
+	case "test":
+		databaseUrl = "mongodb://localhost:27017/PokemonTeamBuilder-test";
+		break;
+
+	case "dev":
+	case "development":
+		databaseUrl = "mongodb://localhost:27017/PokemonTeamBuilder-dev";
+		break;
+
+	case "production":
+	case "prod":
+		// This should match a variable in the .env or in the deployment platform 
+		// so it knows where to find MongoDB Cloud Atlas 
+		databaseUrl = process.env.DATABASE_URL;
+		break;
+
+	default: 
+		console.error("Incorrect environment detected!");
+		process.exit();
+		// break;
+}
+// After figuring out the DB URL, 
+// connect to the DB using that DB URL 
+const { connect } = require("./database.js");
+connect(databaseUrl);
+
+
 app.get("/", (request, response) => {
 	response.json({
 		message: "Hello, world!"
@@ -16,7 +47,9 @@ app.get("/", (request, response) => {
 
 
 
+
 const {PokeApiRouter} = require("./controllers/PokeApiController.js");
+
 app.use("/pokeapi", PokeApiRouter);
 
 
