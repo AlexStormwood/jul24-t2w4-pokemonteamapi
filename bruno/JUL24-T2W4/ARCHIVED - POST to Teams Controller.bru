@@ -1,0 +1,29 @@
+meta {
+  name: ARCHIVED - POST to Teams Controller
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:5678/team/
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "example":"Hello world!",
+    "teamData": {
+      "pokemon": [
+      {
+        "name": "Pikachu",
+        "sprite": "example url goes here",
+        "level": 5,
+        "types": [
+          "electric"
+        ]
+      }
+    ]
+    }
+  }
+}
