@@ -1,6 +1,7 @@
 const express = require("express");
 const { TeamModel } = require("../models/TeamModel");
 const { getPokemonData } = require("../middleware/getPokemonData");
+const { makeTeam } = require("../middleware/makeTeam");
 const router = express.Router();
 
 //							  teamid is a MongoDB document/object ID
@@ -44,16 +45,16 @@ router.post(
 	// DO NOT WANT validatePokemonNames // only if we have some local copy of pokemon names
 
 	getPokemonData, // fetch data from pokeapi and throw errors on invalid pokemon 
-	// makeTeam // turn provided data and fetched data into a Team document
+	makeTeam, // turn provided data and fetched data into a Team document
 	// 
 	async (request, response) => { // route final callback 
 		console.log(request.customData.retrievedPokemon.length);
 
-		let newTeam = await TeamModel.create(request.body.teamData);
+		// let newTeam = await TeamModel.create(request.body.teamData);
 
 		response.json({
 			// requestBody: request.body,
-			team: newTeam
+			team: request.customData.newTeam
 		});
 	}
 );
