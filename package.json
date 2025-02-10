@@ -7,7 +7,8 @@
     "start": "node src/index.js",
     "dev": "node --watch src/index.js",
     "seed": "node src/utils/seed.js",
-    "wipe": "node src/utils/wipe.js"
+    "wipe": "node src/utils/wipe.js",
+    "test":"jest --watch"
   },
   "repository": {
     "type": "git",
@@ -27,5 +28,9 @@
     "helmet": "^8.0.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.9.6"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^7.0.0"
   }
 }
